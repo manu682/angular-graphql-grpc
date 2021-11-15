@@ -1,13 +1,13 @@
-package list_students
+package students
 
 import "context"
 import students "grpc-server/pb/students.service"
 
-type StudentsServer struct {
+type Server struct {
 	students.UnimplementedStudentsServiceServer
 }
 
-func (s *StudentsServer) ListStudents(ctx context.Context, input *students.ListStudentsRequest) (*students.ListStudentsResponse, error) {
+func (s *Server) ListStudents(ctx context.Context, input *students.ListStudentsRequest) (*students.ListStudentsResponse, error) {
 	student := students.Student{
 		StudentId:   "1",
 		StudentAge:  25,

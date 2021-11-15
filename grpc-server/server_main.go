@@ -4,8 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"google.golang.org/grpc"
-	departments "grpc-server/pb/departments.service"
-	students "grpc-server/pb/students.service"
+	departmentsService "grpc-server/pb/departments.service"
+	studentsService "grpc-server/pb/students.service"
 	"grpc-server/pkg/features/students/list_students"
 	"net"
 )
@@ -21,7 +21,7 @@ type studentsServer struct {
 */
 
 type departmentsServer struct {
-	departments.UnimplementedDepartmentsServiceServer
+	departmentsService.UnimplementedDepartmentsServiceServer
 }
 
 func main() {
@@ -35,8 +35,8 @@ func main() {
 		return
 	}
 
-	students.RegisterStudentsServiceServer(myServer, &list_students.StudentsServer{})
-	departments.RegisterDepartmentsServiceServer(myServer, &departmentsServer{})
+	studentsService.RegisterStudentsServiceServer(myServer, &students.Server{})
+	departmentsService.RegisterDepartmentsServiceServer(myServer, &departmentsServer{})
 
 	fmt.Println("Running the server...")
 	err1 := myServer.Serve(listen)
