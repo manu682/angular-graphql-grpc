@@ -1,0 +1,16 @@
+version: '3'
+
+vars:
+  INTERFACE_FOLDER: internal_interfaces
+  PROTO_GEN_FOLDER: pb
+
+tasks:
+  generate-proto:
+    summary: |
+      Creates the proto generated files.
+    cmds:
+      - echo 'Generating stubs from proto...'
+      - protoc -I=./{{.INTERFACE_FOLDER}} --go_out=./{{.PROTO_GEN_FOLDER}} --go_opt=paths=import --go-grpc_out=./{{.PROTO_GEN_FOLDER}}/students.service --go-grpc_opt=paths=import ./{{.INTERFACE_FOLDER}}/students.proto
+      - protoc -I=./{{.INTERFACE_FOLDER}} --go_out=./{{.PROTO_GEN_FOLDER}} --go_opt=paths=import --go-grpc_out=./{{.PROTO_GEN_FOLDER}}/departments.service --go-grpc_opt=paths=import ./{{.INTERFACE_FOLDER}}/departments.proto
+      - echo 'Generated stubs for students.proto!'
+      - echo '-------------------------------------'

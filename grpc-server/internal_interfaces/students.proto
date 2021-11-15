@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package studentsservice;
+
+option go_package = "students.service";
+
+service StudentsService {
+  rpc listStudents(ListStudentsRequest) returns (ListStudentsResponse) {}
+  rpc addStudent(AddStudentsRequest) returns (AddStudentsResponse) {}
+  rpc updateStudent(UpdateStudentsRequest) returns (UpdateStudentsResponse) {}
+  rpc deleteStudent(DeleteStudentsRequest) returns (DeleteStudentsResponse) {}
+  rpc getStudent(GetStudentRequest) returns (GetStudentResponse) {}
+}
+
+message GetStudentRequest {
+  string student_id = 1;
+}
+
+
+message GetStudentResponse {
+  Student student = 1;
+}
+
+message ListStudentsRequest {}
+
+message ListStudentsResponse {
+  repeated Student students = 1;
+}
+
+message AddStudentsRequest {
+  Student student = 1;
+}
+
+message AddStudentsResponse {
+  string student_id = 1;
+}
+
+message UpdateStudentsRequest {
+  Student student = 1;
+}
+
+message UpdateStudentsResponse {
+  string student_id = 1;
+}
+
+message DeleteStudentsRequest {
+  string student_id = 1;
+}
+
+message DeleteStudentsResponse {
+  string student_id = 1;
+}
+
+message Student {
+  string student_id = 1;
+  string student_name = 2;
+  int32 student_age = 3;
+  string department_id = 4;
+}
