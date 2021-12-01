@@ -1,0 +1,76 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  studentsserviceStudentsServiceListStudents(input: StudentsserviceListStudentsRequestInput): StudentsserviceListStudentsResponse
+  studentsserviceStudentsServiceGetStudent(input: StudentsserviceGetStudentRequestInput): StudentsserviceGetStudentResponse
+  studentsserviceStudentsServiceConnectivityState(tryToConnect: Boolean): ConnectivityState
+}
+
+type StudentsserviceListStudentsResponse {
+  students: [StudentsserviceStudent]
+}
+
+type StudentsserviceStudent {
+  studentId: String
+  studentName: String
+  studentAge: Int
+  departmentId: String
+}
+
+scalar StudentsserviceListStudentsRequestInput @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+type StudentsserviceGetStudentResponse {
+  student: StudentsserviceStudent
+}
+
+input StudentsserviceGetStudentRequestInput {
+  studentId: String
+}
+
+enum ConnectivityState {
+  IDLE
+  CONNECTING
+  READY
+  TRANSIENT_FAILURE
+  SHUTDOWN
+}
+
+type Mutation {
+  studentsserviceStudentsServiceAddStudent(input: StudentsserviceAddStudentsRequestInput): StudentsserviceAddStudentsResponse
+  studentsserviceStudentsServiceUpdateStudent(input: StudentsserviceUpdateStudentsRequestInput): StudentsserviceUpdateStudentsResponse
+  studentsserviceStudentsServiceDeleteStudent(input: StudentsserviceDeleteStudentsRequestInput): StudentsserviceDeleteStudentsResponse
+}
+
+type StudentsserviceAddStudentsResponse {
+  studentId: String
+}
+
+input StudentsserviceAddStudentsRequestInput {
+  student: StudentsserviceStudentInput
+}
+
+input StudentsserviceStudentInput {
+  studentId: String
+  studentName: String
+  studentAge: Int
+  departmentId: String
+}
+
+type StudentsserviceUpdateStudentsResponse {
+  studentId: String
+}
+
+input StudentsserviceUpdateStudentsRequestInput {
+  student: StudentsserviceStudentInput
+}
+
+type StudentsserviceDeleteStudentsResponse {
+  studentId: String
+}
+
+input StudentsserviceDeleteStudentsRequestInput {
+  studentId: String
+}

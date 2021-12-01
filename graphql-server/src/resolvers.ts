@@ -3,6 +3,8 @@ const protoLoader = require('@grpc/proto-loader');
 
 const PROTO_PATH = "students.proto"
 
+import { getMeshSDK } from '../.mesh';
+
 // Fake Data
 const students = [
     {
@@ -32,11 +34,13 @@ const departments = [
 
 export const resolvers = {
     Query: {
+        students: () => students,
+
         //With Fake Data
-        //students: () => students,
+        studentsFakeData: () => students,
 
         //With gRPC Data
-        students: async () => {
+        studentsRegularGrpc: async () => {
             const studentsApiPackageDefinition = protoLoader.loadSync(PROTO_PATH, {
                 keepCase: true,
                 longs: String,
@@ -66,6 +70,16 @@ export const resolvers = {
             });
 
             return response;
+        },
+
+        studentsMeshGrpc: async () => {
+            // Load mesh config and get the sdkClient from it
+            const sdk = await getMeshSDK();
+
+            const response = await sdk.studentsserviceStudentsServiceListStudents_query({});
+            console.log("Response : " + JSON.stringify(response));
+
+            return response.studentsserviceStudentsServiceListStudents.students;
         },
         departments: () => departments
     },

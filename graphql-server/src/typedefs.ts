@@ -9,6 +9,14 @@ export const typeDefs = gql`
     department_id: String
   }
 
+  # The student data
+  type StudentUpdate {
+    studentId: String
+    studentName: String
+    studentAge: Int
+    departmentId: String
+  }
+
   # The department data
   type Department {
     department_id: String
@@ -19,6 +27,9 @@ export const typeDefs = gql`
   # clients can execute, along with the return type for each.
   type Query {
     students: [Student],
+    studentsFakeData: [Student],
+    studentsRegularGrpc: [Student],
+    studentsMeshGrpc: [StudentUpdate],
     departments: [Department]
   }
 `;

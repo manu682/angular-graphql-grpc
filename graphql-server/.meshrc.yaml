@@ -1,3 +1,6 @@
+sdk:
+  generateOperations:
+     selectionSetDepth: 2
 sources:
   - name: StudentsApi
     handler:
