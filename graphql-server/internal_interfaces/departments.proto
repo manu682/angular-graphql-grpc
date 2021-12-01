@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package departmentsservice;
+
+option go_package = "departments.service";
+
+service DepartmentsService {
+  rpc listDepartments(ListDepartmentsRequest) returns (ListDepartmentsResponse) {}
+}
+
+message Department {
+  string department_id = 1;
+  string department_name = 2;
+}
+
+message ListDepartmentsRequest {}
+
+message ListDepartmentsResponse {
+  repeated Department departments = 1;
+}

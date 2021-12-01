@@ -6,6 +6,7 @@
     <div *ngIf="error">
         Error :(
     </div>
+    <h1>Output Table</h1>
     <table *ngIf="students" style="border: 1px solid">
         <thead>
             <tr>
@@ -22,4 +23,7 @@
             </tr>
         </tbody>
     </table>
+    <br/>
+    <h1>Input Query</h1>
+    <textarea [(ngModel)]="gqlQuery" [cols]="34" rows="30" (change)="callAPI()"></textarea>
 </div>

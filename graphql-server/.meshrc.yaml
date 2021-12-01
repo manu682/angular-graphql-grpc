@@ -1,0 +1,12 @@
+sources:
+  - name: StudentsApi
+    handler:
+      grpc:
+        endpoint: localhost:5000
+        protoFilePath: internal_interfaces/students.proto
+        requestTimeout: 60000
+    transforms:
+      - namingConvention:
+          typeNames: pascalCase
+          enumValues: upperCase
+          fieldNames: camelCase

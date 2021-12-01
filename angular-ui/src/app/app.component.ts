@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { Student } from './app.model';
 
@@ -13,22 +13,27 @@ export class AppComponent implements OnInit {
   departments = [];
   loading = false;
   error = '';
+  gqlQuery: string = `{
+    students {
+      student_id,
+      student_name,
+      student_age
+    }
+  }`;
 
   constructor(private apollo: Apollo) { }
 
   ngOnInit() {
     console.log("In...1");
+    this.callAPI();
+  }
+
+  callAPI() {
+    console.log('this.gqlQuery : ' + this.gqlQuery);
     this.apollo
       .watchQuery({
-        query: gql`
-        {
-          students {
-            student_id,
-            student_name,
-            student_age
-          }
-        }
-        `,
+        query: gql`${this.gqlQuery}`,
+        pollInterval: 5000,
       })
       .valueChanges.subscribe((result: any) => {
         console.log("In...2");
